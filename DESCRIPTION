@@ -6,9 +6,9 @@ Title: Model-Based Sliced Inverse Regression
 Description: An R package for dimension reduction based on finite Gaussian mixture modeling of inverse regression.
 Authors@R: c(person("Luca", "Scrucca", role = c("aut", "cre"),
                     email = "luca.scrucca@unipg.it"))
-Depends: R (>= 3.0), mclust (>= 5.4)
-Imports: stats, utils, graphics, grDevices, rgl
-Suggests: knitr (>= 1.12), rmarkdown (>= 0.9)
+Depends: R (>= 3.0)
+Imports: mclust (>= 5.4), stats, utils, graphics, grDevices
+Suggests: knitr (>= 1.12), rmarkdown (>= 0.9), rgl
 License: GPL (>= 2)
 VignetteBuilder: knitr
 URL: https://github.com/luca-scr/msir

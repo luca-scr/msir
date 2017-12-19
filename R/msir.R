@@ -428,8 +428,11 @@ plot.msir <- function(x, which, type = c("pairs", "2Dplot", "spinplot", "evalues
 }
 
 # temporary patch waiting spinplot to be made available on CRAN
-spinplot <- function(data, ...) plot3d(data[,c(1,3,2)], type = "p", ...)
-
+spinplot <- function(data, ...) 
+{
+  if(requireNamespace("rgl", quietly = TRUE))
+    plot3d(data[,c(1,3,2)], type = "p", ...)
+}
 
 msir.dir <- function(object, numdir = object$numdir)
 { 
