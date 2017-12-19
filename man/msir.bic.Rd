@@ -53,7 +53,7 @@ Zhu, Miao and Peng (2006) "Sliced Inverse Regression for CDR Space Estimation", 
 Zhu, Zhu (2007) "On kernel method for SAVE", Journal of Multivariate Analysis.
 }
 
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 
 %\note{}
 \seealso{\code{\link{msir}}}

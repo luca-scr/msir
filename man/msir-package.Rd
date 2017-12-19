@@ -11,7 +11,7 @@ The method provides an extension to sliced inverse regression (SIR) and allows t
 
 \seealso{\code{\link{msir}}}
 
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 
 \references{
 Scrucca, L. (2011) Model-based SIR for dimension reduction. 

@@ -27,7 +27,7 @@ Furthermore, it also assigns the above information to the corresponding \code{'m
 
 \references{Scrucca, L. (2011) Model-based SIR for dimension reduction. \emph{Computational Statistics & Data Analysis}, 55(11), 3010-3026.}
 
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 
 \seealso{\code{\link[dr]{dr}}}
 

@@ -3,7 +3,7 @@ citHeader("To cite the 'msir' package in publications use:")
 citEntry(
   entry       = "article",
   title        = "Model-based SIR for dimension reduction",
-  author       = personList(person(given="Luca", family="Scrucca", email="luca@stat.unipg.it")),
+  author       = personList(person(given="Luca", family="Scrucca", email="luca.scrucca@unipg.it")),
   journal      = "Computational Statistics \\& Data Analysis",
   year         = 2011,
   volume       = "5",

@@ -25,6 +25,6 @@
 %\details{}
 %\value{}
 %\references{}
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 \seealso{\code{\link{msir}}}
 %\examples{}

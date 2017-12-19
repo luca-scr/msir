@@ -19,5 +19,5 @@ msir.nslices(n, p)
 \value{The function returns a single value, i.e. the number of slices.}
 
 %\references{}
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 \seealso{\code{\link{msir}}}

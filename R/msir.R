@@ -724,7 +724,7 @@ msir.nslices <- function(n, p)
   pmax(3, floor(log2(n/sqrt(p))))
 }
 
-## slicing functions in package 'dr' version. 3.x.x by Sanford Weisberg
+## slicing functions in package 'dr' version. 3.0.x by Sanford Weisberg
 msir.slices <- function(y, nslices)
 {
     dr.slice.1d <- function(y, h) {
@@ -742,32 +742,66 @@ msir.slices <- function(y, nslices)
         }
         list(slice.indicator = z, nslices = length(u), slice.sizes = sizes)
     }
-    dr.slice2<-function(y,h)
-		{
-		  or <- order(y)
-		  n <- length(y)
-		  m<-floor(n/h)
-		  r<-n-m*h
-		  start<-sp<-ans<-0
-		  j<-1
-		  while((start+m)<n) {
-		      if (r==0)
-		        start<-start
-		      else
-		        {start<-start+1
-		         r<-r-1
-		        }
-		       while (y[or][start+m]==y[or][start+m+1])
-		          start<-start+1
-		       sp[j]<-start+m
-		       start<-sp[j]
-		       j<-j+1
-		  }
-		  sp[j]<-n
-		  ans[or[1:sp[1]]] <- 1
-		  for (k in 2:j){ans[ or[(sp[k-1]+1):sp[k] ] ] <- k}
-		  list(slice.indicator=ans, nslices=j, slice.sizes=c(sp[1],diff(sp)))
-		}
+#     old version
+#     dr.slice2<-function(y,h)
+# 		{
+# 		  or <- order(y)
+# 		  n <- length(y)
+# 		  m <- floor(n/h)
+# 		  r <- n-m*h
+# 		  start <- sp <- ans <-0
+# 		  j <- 1
+# 		  while((start+m)<n) {
+# 		      if (r==0)
+# 		        start<-start
+# 		      else
+# 		        {start<-start+1
+# 		         r<-r-1
+# 		        }
+# 		       while (y[or][start+m]==y[or][start+m+1])
+# 		          start<-start+1
+# 		       sp[j]<-start+m
+# 		       start<-sp[j]
+# 		       j<-j+1
+# 		  }
+# 		  sp[j]<-n
+# 		  ans[or[1:sp[1]]] <- 1
+# 		  for (k in 2:j){ans[ or[(sp[k-1]+1):sp[k] ] ] <- k}
+# 		  list(slice.indicator=ans, nslices=j, slice.sizes=c(sp[1],diff(sp)))
+# 		}
+    dr.slice2 <- function(y,h)
+    {
+       myfind <- function(x,cty) 
+       {
+          ans<-which(x <= cty)
+          if (length(ans)==0) length(cty) else ans[1]
+       } 
+       or <- order(y)     # y[or] would return ordered y
+       cty <- cumsum(table(y))  # cumulative sums of counts of y
+       names(cty) <- NULL # drop class names
+       n <- length(y)     # length of y
+       m<-floor(n/h)      # nominal number of obs per slice
+       sp <- end <- 0     # initialize
+       j <- 0             # slice counter will end up <= h
+       ans <- rep(1,n)    # initialize slice indicator to all slice 1
+       while(end < n-2)   # find slice boundaries: all slices have at least 2 obs
+       { 
+          end <- end+m
+          j <- j+1       
+          sp[j] <- myfind(end,cty) 
+          end <- cty[sp[j]]
+       }
+       sp[j] <- length(cty)
+       for (j in 2:length(sp)) # build slice indicator
+       { 
+         firstobs <- cty[sp[j-1]]+1
+         lastobs <- cty[sp[j]]
+         ans[or[firstobs:lastobs]] <- j
+       }
+       list(slice.indicator = ans, nslices = length(sp),
+            slice.sizes = c(cty[sp[1]],diff(cty[sp])))
+    }
+    
     p <- if (is.matrix(y)) dim(y)[2] else 1
 	  h <- if (length(nslices) == p) nslices else rep(ceiling(nslices^(1/p)),p)
 	  a <- dr.slice.1d( if(is.matrix(y)) y[,1] else y, h[1])
@@ -855,7 +889,7 @@ normalize <- function(x)
 {
 # Normalize the vector x to have unit length
   x <- as.vector(x)
-  x <- x/sqrt(crossprod(x))
+  x <- x/sqrt(crossprod(x)[1,1])
   return(x)
 }
 

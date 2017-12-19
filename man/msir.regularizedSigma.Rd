@@ -27,7 +27,7 @@ msir.regularizedSigma(x, inv = FALSE, model = c("XII", "XXI", "XXX"))
 
 % \references{}
 
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 \seealso{\code{\link{msir}}}
 
 %\examples{}

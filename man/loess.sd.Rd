@@ -34,7 +34,7 @@ The function \code{panel.loess} can be used to add to a scatterplot matrix panel
 
 \references{Weisberg, S. (2005) Applied Linear Regression, 3rd ed., Wiley, New York, pp. 275-278.}
 
-\author{Luca Scrucca \email{luca@stat.unipg.it}}
+\author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 
 \seealso{\code{\link{loess}}}
 
