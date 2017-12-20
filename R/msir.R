@@ -5,8 +5,12 @@
 ## Written by Luca Scrucca                                                 ##
 #############################################################################
 
-msir <- function(x, y, nslices = msir.nslices, slice.function = msir.slices, 
-                 modelNames = NULL, G = NULL, cov = c("mle", "regularized"), 
+msir <- function(x, y, 
+                 nslices = msir.nslices, 
+                 slice.function = msir.slices, 
+                 modelNames = NULL, 
+                 G = NULL, 
+                 cov = c("mle", "regularized"), 
                  ...)
 { 
   call <- match.call()
@@ -16,14 +20,14 @@ msir <- function(x, y, nslices = msir.nslices, slice.function = msir.slices,
     stop("nslices must be an integer value or a function")
   if(!is.function(slice.function)) 
     stop("slice.function must be a function")
-  #-----------------------------------------------------------------  
+  #
   xname <- deparse(substitute(x))
   x <- as.matrix(x)
   n <- nrow(x)
   p <- ncol(x)
   if(is.null(colnames(x))) 
      colnames(x) <- paste(xname, 1:p, sep="")
-  #-----------------------------------------------------------------  
+  #
   if(length(y) != n)
     stop("Dimension of y and x does not match!")
   if(is.character(y))
@@ -37,14 +41,14 @@ msir <- function(x, y, nslices = msir.nslices, slice.function = msir.slices,
   slice.info <- slice.function(y, nslices) 
   nslices <- slice.info$nslices
   ysl <- slice.info$slice.indicator
-  #-----------------------------------------------------------------  
+  #
   # overall parameters
   tau <- slice.info$slice.sizes/n
   mu <- colMeans(x)
   # Sigma <- var(x)*(n-1)/n
   # SVD <- svd(Sigma)
   # inv.sqrt.Sigma <- crossprod(t(SVD$v)*SVD$d^(-1/4))
-  #-----------------------------------------------------------------  
+  #
   # mixture model parameters
   if(is.null(G)) 
     { # guarantees at least 10 obs per slice, 
@@ -143,9 +147,10 @@ msir.fit <- function(data, labels, G = NULL, modelNames = NULL,
 {
   mc <- match.call(expand.dots = TRUE)
   mc[[1]] <- as.name("mclustBIC")
-  mc$labels <- mc$verbose <- mc$noise <- NULL
+  mc$labels <- mc$noise <- NULL
   mc$G <- mc$modelNames <- NULL
   mc$control <- control
+  mc$verbose <- verbose
   dimData <- dim(data)
   oneD <- is.null(dimData) || length(dimData[dimData > 1]) == 1
   if(!oneD && length(dimData) != 2) 
@@ -227,10 +232,9 @@ msir.fit <- function(data, labels, G = NULL, modelNames = NULL,
 
 print.msir <- function(x, ...)
 {
-  object <- x
-  cat("Model-based SIR\n")
-  cat("\nCall:\n")
-  cat(paste(deparse(object$call), sep="\n", collapse = "\n"), "\n", sep="")
+  catwrap(paste0("\'", class(x)[1], "\' model object: "))
+  str(x, max.level = 1, give.attr = FALSE, strict.width = "wrap")
+  invisible()
 }
 
 summary.msir <- function(object, numdir = object$numdir, std = FALSE, verbose = TRUE, ...)
@@ -248,7 +252,7 @@ summary.msir <- function(object, numdir = object$numdir, std = FALSE, verbose = 
      { m <- object$mixmod[[i]]
        sizes[[i]] <- as.vector(table(m$classification)) }
   tab <- rbind(tab, sapply(sizes, function(s) paste(s, collapse="|")))
-  rownames(tab) <- c("Mixt.Mod.", "N.comp.", "N.obs.")
+  rownames(tab) <- c("GMM", "Num.comp.", "Num.obs.")
   
   basis <- object$basis[,seq(numdir),drop=FALSE]
   std.basis <- object$std.basis[,seq(numdir),drop=FALSE]
@@ -257,21 +261,6 @@ summary.msir <- function(object, numdir = object$numdir, std = FALSE, verbose = 
   evalues <- rbind("Eigenvalues" = evalues, 
                    "Cum. %" = cumsum(evalues/sum(object$evalues))*100)
   colnames(evalues) <- colnames(basis)
-  #  { se <- msir.dirse(object)
-  #    out <- matrix(as.double(NA), nrow(basis), numdir*3)
-  #    for(j in 1:numdir)
-  #       { out[,((j-1)*3+1):((j-1)*3+3)] <- 
-  #                        cbind(basis[,j], se[,j], basis[,j]/se[,j])
-  #       }
-  #    rownames(out) <- rownames(basis)
-  #    cnames <- rep(NA, numdir*3)
-  #    cnames[(0:(ncol(basis)-1))*3+1] <- colnames(basis)
-  #    cnames[(0:(ncol(basis)-1))*3+2] <- "SE"
-  #    cnames[(0:(ncol(basis)-1))*3+3] <- "Est/SE"
-  #    colnames(out) <- cnames
-  #    cat("\nEigenvectors and approximate standard errors:\n")
-  #    print(out, digits = digits)
-  #  }
 
   StructDimTab <- NULL
   if(!is.null(object$bic))
@@ -298,11 +287,12 @@ summary.msir <- function(object, numdir = object$numdir, std = FALSE, verbose = 
 
 print.summary.msir <- function(x, digits = max(5, getOption("digits") - 3), ...)
 {
-  cat("\nCall:\n")
-  cat(paste(deparse(x$call), sep="\n", collapse = "\n"), "\n\n", sep="")
-  cat("Model-based SIR\n\n")
-  #
-  cat("Slices:\n")
+  txt <- paste(rep("-", min(50, getOption("width"))), collapse = "")
+  catwrap(txt)
+  catwrap("Model-based SIR")
+  catwrap(txt)
+  
+  cat("\nSlices:\n")
   print(x$tab, na.print="", quote=FALSE)
 
   if(x$verbose)
@@ -325,11 +315,26 @@ print.summary.msir <- function(x, digits = max(5, getOption("digits") - 3), ...)
   invisible()
 }
 
-msir.dir <- function(object, numdir = object$numdir)
-{ 
-  if(class(object) != "msir")
-    stop("object is not of class 'msir'")
-  object$dir[,1:numdir]  
+# msir.dir <- function(object, numdir = object$numdir)
+# { 
+#   if(class(object) != "msir")
+#     stop("object is not of class 'msir'")
+#   object$dir[,1:numdir]  
+# }
+
+predict.msir <- function(object, dim = 1:object$numdir, newdata, ...)
+{  
+  dim <- dim[dim <= object$numdir]
+  if(missing(newdata))
+  { 
+    dir <- object$dir[,dim,drop=FALSE] 
+  } else 
+  { 
+    newdata <- as.matrix(newdata) 
+    newdata <- scale(newdata, center = colMeans(object$x), scale = FALSE)
+    dir <- newdata %*% object$basis[,dim,drop=FALSE]
+  } 
+  return(dir)
 }
 
 eigen.decomp <- function(X1, X2, inv = FALSE, tol = sqrt(.Machine$double.eps))

@@ -8,6 +8,7 @@
 \alias{msir.components}
 \alias{msir.componentsSlice}
 \alias{msir.recoverdir}
+\alias{catwrap}
 
 \title{Internal \code{'msir'} functions}
 
@@ -31,6 +32,7 @@ msir.componentsSlice(object)
 
 msir.recoverdir(object, data, normalized = TRUE, std = FALSE)
 
+catwrap(x, width = getOption("width"), \dots)
 }
 
 % \arguments{}

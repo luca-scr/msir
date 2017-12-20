@@ -34,3 +34,9 @@ normalize <- function(x)
   x <- x/sqrt(crossprod(x)[1,1])
   return(x)
 }
+
+catwrap <- function(x, width = getOption("width"), ...)
+{
+# version of cat with wrapping at specified width
+  cat(paste(strwrap(x, width = width, ...), collapse = "\n"), "\n")
+}
