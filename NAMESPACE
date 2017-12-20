@@ -6,8 +6,7 @@ importFrom("graphics", "abline", "axis", "grid", "layout", "legend",
 importFrom("stats", "coef", "cor", "lm", "lm.fit", "loess", 
            "mahalanobis", "predict", "residuals", "sd")
 importFrom("utils", "flush.console", "installed.packages",
-           "setTxtProgressBar", "txtProgressBar")
-# importFrom("rgl", "plot3d")
+           "setTxtProgressBar", "txtProgressBar", "packageVersion")
 
 exportPattern("^[^\\.]")
 

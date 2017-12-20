@@ -87,11 +87,9 @@ y = x \%*\% b1 + (x \%*\% b1)^3 + 4*(x \%*\% b2)^2 + rnorm(n)
 MSIR = msir(x, y)
 summary(MSIR)
 plot(MSIR, which = 1:2)
-plot(MSIR, type = "spinplot")
+\dontrun{plot(MSIR, type = "spinplot")}
 plot(MSIR, which = 1, type = "2Dplot", span = 0.7)
 plot(MSIR, which = 2, type = "2Dplot", span = 0.7)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{regression}
 \keyword{multivariate}

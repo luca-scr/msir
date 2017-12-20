@@ -8,7 +8,6 @@
 \alias{msir.components}
 \alias{msir.componentsSlice}
 \alias{msir.recoverdir}
-\alias{spinplot}
 
 \title{Internal \code{'msir'} functions}
 
@@ -31,8 +30,6 @@ msir.components(object)
 msir.componentsSlice(object)
 
 msir.recoverdir(object, data, normalized = TRUE, std = FALSE)
-
-spinplot(data, \dots)
 
 }
 

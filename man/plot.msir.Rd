@@ -34,6 +34,7 @@
 \seealso{\code{\link{msir}}}
 
 \examples{
+\dontrun{
 # 2-dimensional response curve
 n = 300; p = 5
 b1 = c(1, 1, 1, rep(0, p-3))
@@ -47,9 +48,10 @@ plot(MSIR)
 plot(MSIR, which = 1:2)
 plot(MSIR, type = "2Dplot", which = 1, span = 0.7)
 plot(MSIR, type = "2Dplot", which = 2, span = 0.7)
-\dontrun{plot(MSIR, type = "spinplot")}
+plot(MSIR, type = "spinplot")
 plot(MSIR, type = "evalues")
 plot(MSIR, type = "coefficients")
+}
 }
 
 \keyword{regression}
