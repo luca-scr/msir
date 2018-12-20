@@ -1,0 +1,140 @@
+---
+title: "A quick tour of msir"
+author: "Luca Scrucca"
+date: "`r format(Sys.time(), '%d %b %Y')`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: false
+    css: "vignette.css"
+vignette: >
+  %\VignetteIndexEntry{A quick tour of msir}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.align = "center", 
+               out.width = "90%",
+               fig.width = 6, fig.height = 5.5,
+               dev.args=list(pointsize=10),
+               par = TRUE, # needed for setting hook 
+               collapse = TRUE, # collapse input & ouput code in chunks
+               warning = FALSE)
+knit_hooks$set(par = function(before, options, envir)
+  { if(before && options$fig.show != "none") 
+       par(family = "sans", mar=c(4.1,4.1,1.1,1.1), mgp=c(3,1,0), tcl=-0.5)
+})
+
+library(rgl)
+setupKnitr()
+knit_hooks$set(rgl = hook_webgl)
+
+set.seed(1) # for exact reproducibility
+```
+
+# Introduction
+
+Model-based Sliced Inverse Regression (MSIR) is a dimension reduction method based on Gaussian finite mixture models which provides an extension to sliced inverse regression (SIR). 
+
+The basis of the MSIR subspace is estimated by modeling the inverse distribution within slice using Gaussian finite mixtures with number of components and covariance matrix parameterization selected by BIC or defined by the user.
+
+The **msir** package implements the methodology described in Scrucca (2011).
+
+This vignette is written in R Markdown using the [knitr](https://cran.r-project.org/package=knitr) package for production. 
+
+```{r}
+library(msir)
+```
+
+# Examples
+
+## 1-dimensional nonlinear response curve
+
+```{r}
+n <- 200
+p <- 5
+b <- as.matrix(c(1,-1,rep(0,p-2)))
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- exp(0.5 * x%*%b) + 0.1*rnorm(n)
+MSIR <- msir(x, y)
+summary(MSIR)
+plot(MSIR, type = "evalues")
+plot(MSIR, type = "coefficients", which = 1)
+plot(MSIR, type = "2Dplot")
+```
+
+## 1-dimensional symmetric response curve
+
+```{r}
+n <- 200
+p <- 5
+b <- as.matrix(c(1,-1,rep(0,p-2)))
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- (0.5 * x%*%b)^2 + 0.1*rnorm(n)
+MSIR <- msir(x, y)
+summary(MSIR)
+plot(MSIR, type = "evalues")
+plot(MSIR, type = "coefficients", which = 1)
+plot(MSIR, type = "2Dplot")
+```
+
+## 2-dimensional response curve
+
+```{r}
+n <- 300
+p <- 5
+b1 <- c(1, 1, 1, rep(0, p-3))
+b2 <- c(1,-1,-1, rep(0, p-3))
+b <- cbind(b1,b2)
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- x %*% b1 + (x %*% b1)^3 + 4*(x %*% b2)^2 + rnorm(n)
+MSIR <- msir(x, y)
+summary(MSIR)
+plot(MSIR, type = "evalues")
+plot(MSIR, type = "coefficients", which = 1:2)
+plot(MSIR, which = 1:2)
+plot(MSIR, which = 1, type = "2Dplot", span = 0.7)
+plot(MSIR, which = 2, type = "2Dplot", span = 0.7)
+```
+
+To obtain rotating 3D spinplot use:
+```{r, eval=FALSE}
+plot(MSIR, type = "spinplot")
+plot(MSIR, type = "spinplot", span = 0.75)
+```
+
+
+## General usage of `spinplot()` function
+
+```{r, echo=-5, eval=FALSE}
+x1 <- rnorm(100)
+x2 <- rnorm(100)
+y  <- x1 + 2*x2^2 + 0.5*rnorm(100)
+spinplot(x1, y, x2)
+rglwidget(elementId = "plot3drgl")
+```
+
+```{r, eval=FALSE}
+spinplot(x1, y, x2, scaling="aaa")
+spinplot(x1, y, x2, rem.lin.trend = "TRUE")
+spinplot(x1, y, x2, fit.smooth = TRUE)
+spinplot(x1, y, x2, fit.ols = TRUE)
+```
+
+```{r, eval=FALSE}
+x <- iris[,1:3]
+y <- iris[,5]
+spinplot(x)
+spinplot(x, markby = y)
+spinplot(x, markby = y, pch = c(0,3,1), 
+         col.points = c("dodgerblue2", "orange", "green3"))
+spinplot(x, markby = y, pch = c(0,3,1), 
+         col.points = c("lightcyan", "yellow", "lightgreen"), 
+         background = "black")
+```
+
+# References
+
+Scrucca, L. (2011) Model-based SIR for dimension reduction. *Computational Statistics & Data Analysis*, 55(11), 3010-3026.

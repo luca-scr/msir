@@ -10,13 +10,13 @@ msir.regularizedSigma(x, inv = FALSE, model = c("XII", "XXI", "XXX"))
 }
 
 \arguments{
-  \item{x}{the predictors data matrix.}
-  \item{inv}{if \code{TRUE} the inverse of the estimated covariance matrix is returned.}
-  \item{model}{available models:
-  \tabular{lcl}{
-  \code{XII} \tab = \tab diagonal equal variances \cr
-  \code{XXI} \tab = \tab diagonal unequal variances \cr
-  \code{XXX} \tab = \tab full covariance matrix
+  \item{x}{Ahe predictors data matrix.}
+  \item{inv}{A logical specifying what must be returned. If \code{TRUE} the inverse of the estimated covariance matrix is returned, otherwise the estimated covariance matrix (default).}
+  \item{model}{A character string specifying the available models:
+  \itemize{
+  \item \code{XII}: diagonal equal variances
+  \item \code{XXI}: diagonal unequal variances
+  \item \code{XXX}: full covariance matrix
   }
 }
 }
@@ -28,6 +28,7 @@ msir.regularizedSigma(x, inv = FALSE, model = c("XII", "XXI", "XXX"))
 % \references{}
 
 \author{Luca Scrucca \email{luca.scrucca@unipg.it}}
+
 \seealso{\code{\link{msir}}}
 
 %\examples{}

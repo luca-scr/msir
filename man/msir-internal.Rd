@@ -31,8 +31,6 @@ msir.components(object)
 msir.componentsSlice(object)
 
 msir.recoverdir(object, data, normalized = TRUE, std = FALSE)
-
-catwrap(x, width = getOption("width"), \dots)
 }
 
 % \arguments{}

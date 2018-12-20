@@ -33,7 +33,8 @@ The function returns a matrix of points projected on the subspace spanned by the
 \seealso{\code{{msir}}}
 
 \examples{
-n <- 200; p <- 5
+n <- 200
+p <- 5
 b <- as.matrix(c(1,-1,rep(0,p-2)))
 x <- matrix(rnorm(n*p), nrow = n, ncol = p)
 y <- exp(0.5 * x\%*\%b) + 0.1*rnorm(n)

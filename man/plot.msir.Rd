@@ -36,13 +36,14 @@
 \examples{
 \dontrun{
 # 2-dimensional response curve
-n = 300; p = 5
-b1 = c(1, 1, 1, rep(0, p-3))
-b2 = c(1,-1,-1, rep(0, p-3))
-b = cbind(b1,b2)
-x = matrix(rnorm(n*p), nrow = n, ncol = p)
-y = x \%*\% b1 + (x \%*\% b1)^3 + 4*(x \%*\% b2)^2 + rnorm(n)
-MSIR = msir(x, y)
+n <- 300
+p <- 5
+b1 <- c(1, 1, 1, rep(0, p-3))
+b2 <- c(1,-1,-1, rep(0, p-3))
+b <- cbind(b1,b2)
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- x \%*\% b1 + (x \%*\% b1)^3 + 4*(x \%*\% b2)^2 + rnorm(n)
+MSIR <- msir(x, y)
 summary(MSIR)
 plot(MSIR)
 plot(MSIR, which = 1:2)

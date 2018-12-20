@@ -12,12 +12,12 @@ spinplot <- function(x, y, z,
                      ngrid = 25, 
                      markby, 
                      pch.points = 1, 
-                     background = "white", 
                      col.points = "black", 
-                     col.axis   = "gray", 
                      cex.points = 1,
+                     col.axis   = "gray", 
                      col.smooth = "limegreen", 
                      col.ols    = "lightsteelblue",
+                     background = "white", 
                      ...)
 {
   if(!requireNamespace("rgl", quietly = TRUE))
@@ -112,16 +112,19 @@ spinplot <- function(x, y, z,
                    color = col.axis)
   # axis labels
   coordtext <- function(i) max(ax[,i])+0.1*diff(ax[,i])
-  rgl::rgl.texts(c(coordtext(1),0,0), c(0,coordtext(2),0), c(0,0,coordtext(3)), 
+  rgl::rgl.texts(c(coordtext(1),0,0), 
+                 c(0,coordtext(2),0), 
+                 c(0,0,coordtext(3)), 
                  text = varnames,
-                 adj = 0.5, cex = rgl::par3d("cex")*2/3,
+                 adj = 0.5, 
+                 cex = rgl::par3d("cex")*2/3,
                  color = col.axis)
   # draw points
   for(j in 1:nu)
   {
     i <- which(markby == u[j])
     rgl::pch3d(X[i,], pch = pch.points[j], color = col.points[j],
-               radius = cex.points/25)
+               cex = rgl::par3d("cex")*cex.points*0.25)
   }
   #
   if(fit.ols)

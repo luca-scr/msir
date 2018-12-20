@@ -1,7 +1,13 @@
 .DS_Store
-misc
+.Rhistory
+^misc$
 aux$
 log$
 ^\.Rproj\.user$
 ^.*\.Rproj$
 ^Makefile$
+^revdep$
+^cran-comments\.md$
+^docs$
+^pkgdown$
+^cran-comments\.md$

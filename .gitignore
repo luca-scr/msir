@@ -1,7 +1,8 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
 .Rproj.user/
 .DS_Store
+*.Rproj
+.Rhistory
+.RData
 misc/
+.Rproj.user
+docs/

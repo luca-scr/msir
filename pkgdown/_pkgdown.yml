@@ -1,0 +1,38 @@
+title: msir
+
+url: https://mclust-org.github.io/msir
+
+template:
+  params:
+    bootswatch: cosmo
+
+navbar:
+  left:
+    - text: "Vignette"
+      href: articles/msir.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+#     - text: "mclust-org packages"
+#       menu:
+#         - text: "mclust"
+#           href: http://www.stat.unipg.it/luca/mclust-org/mclust
+#         - text: "clustvarsel"
+#           href: http://www.stat.unipg.it/luca/mclust-org/clustvarsel
+  right:
+    - text: "mclust-org"
+      icon: fa-home
+      href: https://mclust-org.github.io
+
+figures:
+  dev: grDevices::png
+  dpi: 72
+  dev.args: []
+  fig.ext: png
+  fig.width: 7
+  fig.height: 6
+
+authors:
+  Luca Scrucca:
+    href: http://www.stat.unipg.it/luca

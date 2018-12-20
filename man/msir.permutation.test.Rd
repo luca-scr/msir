@@ -34,11 +34,12 @@ Furthermore, it also assigns the above information to the corresponding \code{'m
 \examples{
 \dontrun{
 # 1-dimensional simple regression
-n = 200; p = 5
-b = as.matrix(c(1,-1,rep(0,p-2)))
-x = matrix(rnorm(n*p), nrow = n, ncol = p)
-y = exp(0.5 * x\%*\%b) + 0.1*rnorm(n)
-MSIR = msir(x, y)
+n <- 200
+p <- 5
+b <- as.matrix(c(1,-1,rep(0,p-2)))
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- exp(0.5 * x\%*\%b) + 0.1*rnorm(n)
+MSIR <- msir(x, y)
 msir.permutation.test(MSIR)
 summary(MSIR)
 }

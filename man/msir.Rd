@@ -12,17 +12,17 @@ msir(x, y, nslices = msir.nslices, slice.function = msir.slices,
 }
 
 \arguments{
-  \item{x}{a \eqn{(n \times p)}{(n x p)} design matrix containing the predictors data values.}
-  \item{y}{a \eqn{(n \times 1)}{(n x 1)} vector of data values for the response variable. It can be a numeric vector (regression) but also a factor (classification). In the latter case, the levels of the factor define the slices used.}
-  \item{nslices}{the number of slices used, unless \code{y} is a factor. By default the value returned by \code{\link{msir.nslices}}.}
-  \item{slice.function}{the slice functions to be used, by default \code{\link{msir.slices}}, but the user can provide a different slicing function.}
-  \item{modelNames}{a vector of character strings indicating the Gaussian mixture models to be fitted as described in \code{\link[mclust]{mclustModelNames}}. If a  vector of strings is given they are used for all the slices. If a list of vectors is provided then each vector refers to a single slice.}
-  \item{G}{an integer vector specifying the numbers of mixture components used in fitting Gaussian mixture models. If a list of vectors is provided then each vector refers to a single slice.}
+  \item{x}{A \eqn{(n \times p)}{(n x p)} design matrix containing the predictors data values.}
+  \item{y}{A \eqn{(n \times 1)}{(n x 1)} vector of data values for the response variable. It can be a numeric vector (regression) but also a factor (classification). In the latter case, the levels of the factor define the slices used.}
+  \item{nslices}{The number of slices used, unless \code{y} is a factor. By default the value returned by \code{\link{msir.nslices}}.}
+  \item{slice.function}{The slice functions to be used, by default \code{\link{msir.slices}}, but the user can provide a different slicing function.}
+  \item{modelNames}{A vector of character strings indicating the Gaussian mixture models to be fitted as described in \code{\link[mclust]{mclustModelNames}}. If a  vector of strings is given they are used for all the slices. If a list of vectors is provided then each vector refers to a single slice.}
+  \item{G}{An integer vector specifying the numbers of mixture components used in fitting Gaussian mixture models. If a list of vectors is provided then each vector refers to a single slice.}
   \item{cov}{The predictors marginal covariance matrix. Possible choices are:
-  \tabular{lcl}{
-    \code{"mle"} \tab = \tab maximum likelihood estimate\cr
-    \code{"regularized"} \tab = \tab regularized covariance matrix (see  \code{\link{msir.regularizedSigma}})\cr
-    \code{R matrix} \tab = \tab a \eqn{(p \times p)}{(p x p)} user defined covariance matrix
+  \itemize{
+  \item \code{"mle"}: for the maximum likelihood estimate
+  \item \code{"regularized"}: for a regularized estimate of the covariance matrix (see \code{\link{msir.regularizedSigma}})
+  \item \code{R matrix}: a \eqn{(p \times p)}{(p x p)} user defined covariance matrix
   }
 }
   \item{\dots}{other arguments passed to \code{msir.compute}.}
@@ -59,32 +59,35 @@ Returns an object of class \code{'msir'} with attributes:
 
 \examples{
 # 1-dimensional simple regression
-n = 200; p = 5
-b = as.matrix(c(1,-1,rep(0,p-2)))
-x = matrix(rnorm(n*p), nrow = n, ncol = p)
-y = exp(0.5 * x\%*\%b) + 0.1*rnorm(n)
-MSIR = msir(x, y)
+n <- 200
+p <- 5
+b <- as.matrix(c(1,-1,rep(0,p-2)))
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- exp(0.5 * x\%*\%b) + 0.1*rnorm(n)
+MSIR <- msir(x, y)
 summary(MSIR)
 plot(MSIR, type = "2Dplot")
 
 # 1-dimensional symmetric response curve
-n = 200; p = 5
-b = as.matrix(c(1,-1,rep(0,p-2)))
-x = matrix(rnorm(n*p), nrow = n, ncol = p)
-y = (0.5 * x\%*\%b)^2 + 0.1*rnorm(n)
-MSIR = msir(x, y)
+n <- 200
+p <- 5
+b <- as.matrix(c(1,-1,rep(0,p-2)))
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- (0.5 * x\%*\%b)^2 + 0.1*rnorm(n)
+MSIR <- msir(x, y)
 summary(MSIR)
 plot(MSIR, type = "2Dplot")
 plot(MSIR, type = "coefficients")
 
 # 2-dimensional response curve
-n = 300; p = 5
-b1 = c(1, 1, 1, rep(0, p-3))
-b2 = c(1,-1,-1, rep(0, p-3))
-b = cbind(b1,b2)
-x = matrix(rnorm(n*p), nrow = n, ncol = p)
-y = x \%*\% b1 + (x \%*\% b1)^3 + 4*(x \%*\% b2)^2 + rnorm(n)
-MSIR = msir(x, y)
+n <- 300
+p <- 5
+b1 <- c(1, 1, 1, rep(0, p-3))
+b2 <- c(1,-1,-1, rep(0, p-3))
+b <- cbind(b1,b2)
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- x \%*\% b1 + (x \%*\% b1)^3 + 4*(x \%*\% b2)^2 + rnorm(n)
+MSIR <- msir(x, y)
 summary(MSIR)
 plot(MSIR, which = 1:2)
 \dontrun{plot(MSIR, type = "spinplot")}

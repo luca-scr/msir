@@ -28,13 +28,11 @@ This BIC-type criterion for the determination of the structural dimension select
 \deqn{G(d) = l(d) - Penalty(p,d,n)}
 where \eqn{l(d)} is the log-likelihood for dimensions up to \eqn{d}, \eqn{p} is the number of predictors, and \eqn{n} is the sample size.
 The term \eqn{Penalty(p,d,n)} is the type of penalty to be used:
-  \tabular{ll}{
-  \code{type = 1} \tab \eqn{Penalty(p,d,n) = -(p-d) \log(n)} \cr
-  \code{type = 2} \tab  \eqn{Penalty(p,d,n) = 0.5 C d (2p-d+1)} \cr
-                  \tab where \eqn{C = (0.5 \log(n) + 0.1 n^(1/3))/2  nslices/n}\cr
-  \code{type = 3} \tab  \eqn{Penalty(p,d,n) = 0.5 C d (2p-d+1)} \cr
-                  \tab where \eqn{C = \log(n) nslices/n}\cr
-  \code{type = 3} \tab  \eqn{Penalty(p,d,n) = 1/2 d \log(n)}
+  \itemize{
+  \item \code{type = 1}: \eqn{Penalty(p,d,n) = -(p-d) \log(n)}
+  \item \code{type = 2}: \eqn{Penalty(p,d,n) = 0.5 C d (2p-d+1)}, where \eqn{C = (0.5 \log(n) + 0.1 n^(1/3))/2  nslices/n}
+  \item \code{type = 3}: \eqn{Penalty(p,d,n) = 0.5 C d (2p-d+1)}, where \eqn{C = \log(n) nslices/n}
+  \item \code{type = 4} \eqn{Penalty(p,d,n) = 1/2 d \log(n)}
   }
 }
 
@@ -59,11 +57,12 @@ Zhu, Zhu (2007) "On kernel method for SAVE", Journal of Multivariate Analysis.
 \seealso{\code{\link{msir}}}
 \examples{
 # 1-dimensional symmetric response curve
-n = 200; p = 5
-b = as.matrix(c(1,-1,rep(0,p-2)))
-x = matrix(rnorm(n*p), nrow = n, ncol = p)
-y = (0.5 * x\%*\%b)^2 + 0.1*rnorm(n)
-MSIR = msir(x, y)
+n <- 200
+p <- 5
+b <- as.matrix(c(1,-1,rep(0,p-2)))
+x <- matrix(rnorm(n*p), nrow = n, ncol = p)
+y <- (0.5 * x\%*\%b)^2 + 0.1*rnorm(n)
+MSIR <- msir(x, y)
 msir.bic(MSIR, plot = TRUE)
 summary(MSIR)
 msir.bic(MSIR, type = 3, plot = TRUE)

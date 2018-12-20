@@ -1,17 +1,34 @@
 import(mclust)
 
-importFrom("grDevices", "xy.coords")
-importFrom("graphics", "abline", "axis", "grid", "layout", "legend",
-            "lines", "mtext", "pairs", "par", "plot", "points", "strwidth")
-importFrom("stats", "coef", "cor", "lm", "lm.fit", "loess", 
+importFrom("grDevices", 
+           "xy.coords")
+importFrom("graphics", 
+           "abline", "axis", "grid", "layout", "legend", "lines", 
+           "mtext", "pairs", "par", "plot", "points", "strwidth")
+importFrom("stats", 
+           "coef", "cor", "lm", "lm.fit", "loess", 
            "mahalanobis", "predict", "residuals", "sd")
-importFrom("utils", "flush.console", "installed.packages", "str",
+importFrom("utils", 
+           "flush.console", "installed.packages", "str",
            "setTxtProgressBar", "txtProgressBar", "packageVersion")
 
-exportPattern("^[^\\.]")
+# exportPattern("^[^\\.]")
 
+export("msir", "print.msir", "summary.msir", "print.summary.msir",
+       "plot.msir", "predict.msir")
 S3method("print", "msir")
 S3method("summary", "msir")
 S3method("print", "summary.msir")
 S3method("plot", "msir")
 S3method("predict", "msir")
+
+export("bicDimRed", "loess.sd", "panel.loess", "spinplot")
+
+export("msir.bic", "msir.nslices", "msir.slices",
+       "msir.permutation.test", "msir.regularizedSigma")
+
+# internal
+export("msir.fit", "eigen.decomp", "mvdnorm", "normalize", 
+       "msir.parameters", "msir.components", "msir.componentsSlice",
+       "msir.recoverdir")
+       
