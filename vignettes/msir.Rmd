@@ -27,9 +27,9 @@ knit_hooks$set(par = function(before, options, envir)
        par(family = "sans", mar=c(4.1,4.1,1.1,1.1), mgp=c(3,1,0), tcl=-0.5)
 })
 
-library(rgl)
-setupKnitr()
-knit_hooks$set(rgl = hook_webgl)
+# library(rgl)
+# setupKnitr()
+# knit_hooks$set(rgl = hook_webgl)
 
 set.seed(1) # for exact reproducibility
 ```
@@ -48,9 +48,7 @@ This vignette is written in R Markdown using the [knitr](https://cran.r-project.
 library(msir)
 ```
 
-# Examples
-
-## 1-dimensional nonlinear response curve
+# Example: 1-dimensional nonlinear response curve
 
 ```{r}
 n <- 200
@@ -65,7 +63,7 @@ plot(MSIR, type = "coefficients", which = 1)
 plot(MSIR, type = "2Dplot")
 ```
 
-## 1-dimensional symmetric response curve
+# Example: 1-dimensional symmetric response curve
 
 ```{r}
 n <- 200
@@ -80,7 +78,7 @@ plot(MSIR, type = "coefficients", which = 1)
 plot(MSIR, type = "2Dplot")
 ```
 
-## 2-dimensional response curve
+# Example: 2-dimensional response curve
 
 ```{r}
 n <- 300
@@ -106,7 +104,7 @@ plot(MSIR, type = "spinplot", span = 0.75)
 ```
 
 
-## General usage of `spinplot()` function
+# General usage of `spinplot()` function
 
 ```{r, echo=-5, eval=FALSE}
 x1 <- rnorm(100)
@@ -138,3 +136,9 @@ spinplot(x, markby = y, pch = c(0,3,1),
 # References
 
 Scrucca, L. (2011) Model-based SIR for dimension reduction. *Computational Statistics & Data Analysis*, 55(11), 3010-3026.
+
+----
+
+```{r}
+devtools::session_info()
+```
