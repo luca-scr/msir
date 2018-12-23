@@ -14,7 +14,7 @@ spinplot <- function(x, y, z,
                      pch.points = 1, 
                      col.points = "black", 
                      cex.points = 1,
-                     col.axis   = "gray", 
+                     col.axis   = "gray50", 
                      col.smooth = "limegreen", 
                      col.ols    = "lightsteelblue",
                      background = "white", 
@@ -65,18 +65,22 @@ spinplot <- function(x, y, z,
   #
   n <- nrow(X) 
 
-  if(missing(markby)) markby <- rep(1,n)
-  u <- sort(unique(markby))
+  markby <- if(missing(markby)) rep(1,n) else as.numeric(factor(markby))
+  u  <- sort(unique(markby))
   nu <- length(u)
   # specify pch.points recycling if necessary
-  if(missing(pch.points)) pch.points <- 1:nu
-  pch.points <- rep(pch.points, nu/length(pch.points)+1)[1:nu]
+  if(missing(pch.points)) pch.points <- seq(nu)
+  pch.points <- rep(pch.points, nu/length(pch.points)+1)[seq(nu)]
   # specify col.points recycling if necessary
-  if(missing(col.points)) col.points <- 1:nu 
+  if(missing(col.points)) col.points <- seq(nu)
   if(is.numeric(col.points))
     col.points <- grDevices::palette()[col.points]
   col.points <- rep(col.points, nu/length(col.points)+1)[1:nu]
-
+  if(background == "white")
+    col.points[col.points=="white"] <- "black"
+  if(background == "black")
+    col.points[col.points=="black"] <- "white"
+  
   # setup rgl graphical window
   if(rgl::rgl.cur() > 0) 
     rgl::rgl.set(rgl::rgl.cur()) else rgl::rgl.open()
@@ -117,15 +121,11 @@ spinplot <- function(x, y, z,
                  c(0,0,coordtext(3)), 
                  text = varnames,
                  adj = 0.5, 
-                 cex = rgl::par3d("cex")*2/3,
+                 cex = rgl::par3d("cex")*0.8,
                  color = col.axis)
   # draw points
-  for(j in 1:nu)
-  {
-    i <- which(markby == u[j])
-    rgl::pch3d(X[i,], pch = pch.points[j], color = col.points[j],
-               cex = rgl::par3d("cex")*cex.points*0.25)
-  }
+  rgl::pch3d(X, cex = cex.points*0.2,
+             pch = pch.points[markby], color = col.points[markby])
   #
   if(fit.ols)
     { 
@@ -156,8 +156,8 @@ spinplot <- function(x, y, z,
     }
 
   # set initial view
-  rgl::rgl.viewpoint(theta = 10, phi = 15, fov = 1, zoom = 0.5)
-  rgl::par3d("windowRect" = c(100,100,500,500))
+  rgl::rgl.viewpoint(theta = 10, phi = 15, fov = 1)
+  rgl::par3d("windowRect" = c(100,100,500,500), "zoom" = 2/3)
   rgl::rgl.bringtotop()
   
   invisible()  

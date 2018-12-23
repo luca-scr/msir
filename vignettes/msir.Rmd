@@ -16,18 +16,18 @@ vignette: >
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(fig.align = "center", 
-               out.width = "90%",
-               fig.width = 6, fig.height = 5.5,
+               out.width = "70%",
+               fig.width = 5, fig.height = 4,
                dev.args=list(pointsize=10),
                par = TRUE, # needed for setting hook 
                collapse = TRUE, # collapse input & ouput code in chunks
                warning = FALSE)
 knit_hooks$set(par = function(before, options, envir)
   { if(before && options$fig.show != "none") 
-       par(family = "sans", mar=c(4.1,4.1,1.1,1.1), mgp=c(3,1,0), tcl=-0.5)
+       par(mar=c(4.1,4.1,1.1,1.1), mgp=c(3,1,0), tcl=-0.5)
 })
 
-# library(rgl)
+library(rgl)
 # setupKnitr()
 # knit_hooks$set(rgl = hook_webgl)
 
@@ -98,40 +98,73 @@ plot(MSIR, which = 2, type = "2Dplot", span = 0.7)
 ```
 
 To obtain rotating 3D spinplot use:
-```{r, eval=FALSE}
+```{r, echo=1, fig.width = 4, fig.height = 4}
 plot(MSIR, type = "spinplot")
+rglwidget()
+```
+
+```{r, echo=1, fig.width = 4, fig.height = 4}
 plot(MSIR, type = "spinplot", span = 0.75)
+rglwidget()
 ```
 
 
 # General usage of `spinplot()` function
 
-```{r, echo=-5, eval=FALSE}
+```{r}
 x1 <- rnorm(100)
 x2 <- rnorm(100)
-y  <- x1 + 2*x2^2 + 0.5*rnorm(100)
+y  <- 2*x1 + x2^2 + 0.5*rnorm(100)
+```
+
+```{r, echo=1}
 spinplot(x1, y, x2)
-rglwidget(elementId = "plot3drgl")
+rglwidget()
 ```
 
-```{r, eval=FALSE}
+```{r, echo=1}
 spinplot(x1, y, x2, scaling="aaa")
-spinplot(x1, y, x2, rem.lin.trend = "TRUE")
-spinplot(x1, y, x2, fit.smooth = TRUE)
-spinplot(x1, y, x2, fit.ols = TRUE)
+rglwidget()
 ```
 
-```{r, eval=FALSE}
+```{r, echo=1}
+spinplot(x1, y, x2, rem.lin.trend = "TRUE")
+rglwidget()
+```
+
+```{r, echo=1}
+spinplot(x1, y, x2, fit.smooth = TRUE)
+rglwidget()
+```
+
+```{r, echo=1}
+spinplot(x1, y, x2, fit.ols = TRUE)
+rglwidget()
+```
+
+```{r}
 x <- iris[,1:3]
 y <- iris[,5]
+```
+
+```{r, echo=1}
 spinplot(x)
+rglwidget()
+```
+
+```{r, echo=1}
 spinplot(x, markby = y)
-spinplot(x, markby = y, pch = c(0,3,1), 
-         col.points = c("dodgerblue2", "orange", "green3"))
+rglwidget()
+```
+
+```{r, echo=1:3}
 spinplot(x, markby = y, pch = c(0,3,1), 
          col.points = c("lightcyan", "yellow", "lightgreen"), 
          background = "black")
+rglwidget()
 ```
+
+<br><br>
 
 # References
 
@@ -139,6 +172,7 @@ Scrucca, L. (2011) Model-based SIR for dimension reduction. *Computational Stati
 
 ----
 
-```{r}
+```{r, echo=-1}
+options(width=100)
 devtools::session_info()
 ```
