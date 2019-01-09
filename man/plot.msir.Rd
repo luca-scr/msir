@@ -1,6 +1,6 @@
 \name{plot.msir}
 \alias{plot.msir}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{Plot method for \code{'msir'} objects.}
 
 \description{Plots directions and other information from MSIR estimation.}

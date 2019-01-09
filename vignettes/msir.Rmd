@@ -100,12 +100,12 @@ plot(MSIR, which = 2, type = "2Dplot", span = 0.7)
 To obtain rotating 3D spinplot use:
 ```{r, echo=1, fig.width = 4, fig.height = 4}
 plot(MSIR, type = "spinplot")
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1, fig.width = 4, fig.height = 4}
 plot(MSIR, type = "spinplot", span = 0.75)
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 
@@ -119,27 +119,27 @@ y  <- 2*x1 + x2^2 + 0.5*rnorm(100)
 
 ```{r, echo=1}
 spinplot(x1, y, x2)
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1}
 spinplot(x1, y, x2, scaling="aaa")
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1}
 spinplot(x1, y, x2, rem.lin.trend = "TRUE")
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1}
 spinplot(x1, y, x2, fit.smooth = TRUE)
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1}
 spinplot(x1, y, x2, fit.ols = TRUE)
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r}
@@ -149,19 +149,19 @@ y <- iris[,5]
 
 ```{r, echo=1}
 spinplot(x)
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1}
 spinplot(x, markby = y)
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 ```{r, echo=1:3}
 spinplot(x, markby = y, pch = c(0,3,1), 
          col.points = c("lightcyan", "yellow", "lightgreen"), 
          background = "black")
-rglwidget()
+rglwidget(width=500, height=450)
 ```
 
 <br><br>

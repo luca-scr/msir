@@ -63,7 +63,7 @@ Cook R. D., Weisberg S. (1999) \emph{Applied Regression Including Computing and 
 \dontrun{
 x1 <- rnorm(100)
 x2 <- rnorm(100)
-y  <- x1 + 2*x2^2 + 0.5*rnorm(100)
+y  <- 2*x1 + x2^2 + 0.5*rnorm(100)
 spinplot(x1, y, x2)
 spinplot(x1, y, x2, scaling = "aaa")
 spinplot(x1, y, x2, rem.lin.trend = "TRUE")

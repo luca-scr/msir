@@ -38,6 +38,7 @@ spinplot <- function(x, y, z,
    }
   if(is.null(varnames)) 
      varnames <- c("H", "V", "O")
+  varnames <- abbreviate(varnames, minlength = 8)
   #
   if(rem.lin.trend)
     { e <- lm(X[,2]~X[,c(1,3)])$residuals
@@ -80,7 +81,7 @@ spinplot <- function(x, y, z,
     col.points[col.points=="white"] <- "black"
   if(background == "black")
     col.points[col.points=="black"] <- "white"
-  
+
   # setup rgl graphical window
   if(rgl::rgl.cur() > 0) 
     rgl::rgl.set(rgl::rgl.cur()) else rgl::rgl.open()

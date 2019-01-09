@@ -1,8 +1,9 @@
-# msir 1.3.2 (2018-12 NOT ON CRAN)
+# msir 1.3.2 (2019-01 NOT ON CRAN)
 
 * Update vignette.
 * Added website for inclusion in mclust-org.
 * Fix a bug in `msir.slices()`.
+* Fix a bug on recycling array of length 1.
 * **rgl** package is no longer a dependency but only suggested.
 
 # msir 1.3.1 (2016-04)
