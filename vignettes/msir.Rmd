@@ -157,7 +157,7 @@ spinplot(x, markby = y)
 rglwidget(width=500, height=450)
 ```
 
-```{r, echo=1:3}
+```{r, echo=1}
 spinplot(x, markby = y, pch = c(0,3,1), 
          col.points = c("lightcyan", "yellow", "lightgreen"), 
          background = "black")
@@ -174,5 +174,5 @@ Scrucca, L. (2011) Model-based SIR for dimension reduction. *Computational Stati
 
 ```{r, echo=-1}
 options(width=100)
-devtools::session_info()
+sessionInfo()
 ```

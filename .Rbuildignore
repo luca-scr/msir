@@ -1,3 +1,4 @@
+^CRAN-RELEASE$
 .DS_Store
 .Rhistory
 ^misc$
@@ -10,4 +11,4 @@ log$
 ^cran-comments\.md$
 ^docs$
 ^pkgdown$
-^cran-comments\.md$
+^README\.md$

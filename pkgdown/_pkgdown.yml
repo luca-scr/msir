@@ -6,9 +6,7 @@
 # Usage:
 # pkgdown::build_site()
 # system("mv docs/ ~/R/mclust-org/msir")
-# system("cp -rf docs/ ~/R/mclust-org/msir")
-# system("rm -rf docs/")
-#
+# file.edit("~/R/mclust-org/howto_update.md")
 
 title: msir
 

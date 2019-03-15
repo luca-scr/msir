@@ -1,7 +1,8 @@
 # msir
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/msir)](https://cran.r-project.org/package=msir)
+[![CRAN\_Status](http://www.r-pkg.org/badges/version/msir)](https://cran.r-project.org/package=msir)
 [![CRAN\_MonthlyDownloads](http://cranlogs.r-pkg.org/badges/msir)](https://cran.r-project.org/package=msir)
+[![CRAN\_dependencies](https://tinyverse.netlify.com/badge/msir)](https://cran.R-project.org/package=mclust)
 
 An [R](https://www.r-project.org/) package implementing *model-based sliced inverse regression* as described in Scrucca (2011).
 

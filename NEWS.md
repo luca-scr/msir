@@ -1,4 +1,4 @@
-# msir 1.3.2 (2019-01 NOT ON CRAN)
+# msir 1.3.2 (2019-03)
 
 * Update vignette.
 * Added website for inclusion in mclust-org.
