@@ -21,7 +21,7 @@ spinplot <- function(x, y, z,
                      ...)
 {
   if(!requireNamespace("rgl", quietly = TRUE))
-    return(warning("'rgl' packages is needed by spinplot."))
+    return(warning("'rgl' package not available."))
     
   if(missing(y) & missing(z))
     { X <- as.matrix(x)

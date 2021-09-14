@@ -22,7 +22,7 @@ or the development version from GitHub:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("luca-scr/msir", build_vignettes = TRUE)
+devtools::install_github("luca-scr/msir", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
 
 ## Usage

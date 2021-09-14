@@ -29,7 +29,7 @@ Furthermore, it also assigns the above information to the corresponding \code{'m
 
 \author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 
-\seealso{\code{\link[dr]{dr}}}
+\seealso{Function \code{dr()} in package \pkg{dr}.}
 
 \examples{
 \dontrun{

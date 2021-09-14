@@ -55,7 +55,7 @@ Returns an object of class \code{'msir'} with attributes:
 \author{Luca Scrucca \email{luca.scrucca@unipg.it}}
 % \note{}
 %% ~Make other sections like Warning with \section{Warning }{....} ~
-\seealso{\code{\link[msir]{summary.msir}}, \code{\link[msir]{plot.msir}}, \code{\link[dr]{dr}}}
+\seealso{\code{\link[msir]{summary.msir}}, \code{\link[msir]{plot.msir}}.}
 
 \examples{
 # 1-dimensional simple regression
