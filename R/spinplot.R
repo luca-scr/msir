@@ -83,14 +83,14 @@ spinplot <- function(x, y, z,
     col.points[col.points=="black"] <- "white"
 
   # setup rgl graphical window
-  if(rgl::rgl.cur() > 0) 
-    rgl::rgl.set(rgl::rgl.cur()) else rgl::rgl.open()
-  rgl::rgl.bg(sphere = FALSE, fogtype = "none", lit = TRUE, 
+  if(rgl::cur3d() > 0) 
+    rgl::set3d(rgl::cur3d()) else rgl::open3d()
+  rgl::bg3d(sphere = FALSE, fogtype = "none", lit = TRUE, 
               back = "lines", alpha = 1,
               color = rep(background,2))
   rgl::material3d("point_antialias" = TRUE)
-  rgl::rgl.pop("lights")
-  rgl::rgl.light(ambient = "black", diffuse = "black", specular = "black")
+  rgl::pop3d("lights")
+  rgl::light3d(ambient = "black", diffuse = "black", specular = "black")
 
   # draw the spinplot
   rgl::plot3d(X, type = "n",
@@ -117,7 +117,7 @@ spinplot <- function(x, y, z,
                    color = col.axis)
   # axis labels
   coordtext <- function(i) max(ax[,i])+0.1*diff(ax[,i])
-  rgl::rgl.texts(c(coordtext(1),0,0), 
+  rgl::text3d(c(coordtext(1),0,0), 
                  c(0,coordtext(2),0), 
                  c(0,0,coordtext(3)), 
                  text = varnames,
@@ -136,7 +136,7 @@ spinplot <- function(x, y, z,
       zgrid <- seq(-1,1,length=ngrid)
       pred.grid <- expand.grid(x = xgrid, z = zgrid)
       pred <- matrix(predict(mod, pred.grid), ngrid, ngrid)
-      rgl::rgl.surface(xgrid, zgrid, pred, 
+      rgl::surface3d(x = xgrid, z = zgrid, y = pred, 
                        alpha = 0.5, lit = FALSE, 
                        color = col.ols, 
                        front = "lines", back = "lines")
@@ -150,14 +150,14 @@ spinplot <- function(x, y, z,
       zgrid <- seq(-1,1,length=ngrid)
       pred.grid <- expand.grid(x = xgrid, z = zgrid)
       pred <- predict(mod, pred.grid)
-      rgl::rgl.surface(xgrid, zgrid, pred, 
+      rgl::surface3d(x = xgrid, z = zgrid, y = pred, 
                        alpha = 0.5, lit = FALSE, 
                        color = col.smooth, 
                        front = "lines", back = "lines")
     }
 
   # set initial view
-  rgl::rgl.viewpoint(theta = 10, phi = 15, fov = 1)
+  rgl::view3d(theta = 10, phi = 15, fov = 1)
   rgl::par3d("windowRect" = c(100,100,500,500), "zoom" = 2/3)
   rgl::rgl.bringtotop()
   
