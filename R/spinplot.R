@@ -86,16 +86,16 @@ spinplot <- function(x, y, z,
   if(rgl::cur3d() > 0) 
     rgl::set3d(rgl::cur3d()) else rgl::open3d()
   rgl::bg3d(sphere = FALSE, fogtype = "none", lit = TRUE, 
-              back = "lines", alpha = 1,
-              color = rep(background,2))
+            back = "lines", alpha = 1,
+            color = rep(background,2))
   rgl::material3d("point_antialias" = TRUE)
   rgl::pop3d("lights")
   rgl::light3d(ambient = "black", diffuse = "black", specular = "black")
 
   # draw the spinplot
-  rgl::plot3d(X, type = "n",
-              xlab = "", ylab = "", zlab = "",
-              box = FALSE, axes = FALSE)
+  out <- rgl::plot3d(X, type = "n",
+                     xlab = "", ylab = "", zlab = "",
+                     box = FALSE, axes = FALSE)
   # draw axis
   alen <- 0.05; awid <- 0.01
   bbox <- rgl::par3d("bbox")
@@ -151,9 +151,9 @@ spinplot <- function(x, y, z,
       pred.grid <- expand.grid(x = xgrid, z = zgrid)
       pred <- predict(mod, pred.grid)
       rgl::surface3d(x = xgrid, z = zgrid, y = pred, 
-                       alpha = 0.5, lit = FALSE, 
-                       color = col.smooth, 
-                       front = "lines", back = "lines")
+                     alpha = 0.5, lit = FALSE, 
+                     color = col.smooth, 
+                     front = "lines", back = "lines")
     }
 
   # set initial view
@@ -161,7 +161,7 @@ spinplot <- function(x, y, z,
   rgl::par3d("windowRect" = c(100,100,500,500), "zoom" = 2/3)
   rgl::rgl.bringtotop()
   
-  invisible()  
+  invisible(out)
 }
 
 

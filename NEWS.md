@@ -1,3 +1,8 @@
+# msir 1.4 (2023-02)
+
+* Changed `rgl.*` to `*3d` to account for version 1.0 of **rgl** package.
+* Increased version of **R** required to at least 4.0.
+
 # msir 1.3.3 (2020-12)
 
 # msir 1.3.2 (2019-03)

@@ -239,11 +239,7 @@ print.msir <- function(x, ...)
 
 summary.msir <- function(object, numdir = object$numdir, std = FALSE, verbose = TRUE, ...)
 {
-  if(class(object) != "msir")
-    stop("object is not of class 'msir'." )
-
-  #n <- length(object$y)
-  #nslices <- object$slice.info$nslices
+  stopifnot(inherits(object, "msir"))
 
   tab <- rbind(sapply(object$mixmod, function(m) m$modelName),
                sapply(object$mixmod, function(m) m$G))
@@ -314,13 +310,6 @@ print.summary.msir <- function(x, digits = max(5, getOption("digits") - 3), ...)
 
   invisible()
 }
-
-# msir.dir <- function(object, numdir = object$numdir)
-# { 
-#   if(class(object) != "msir")
-#     stop("object is not of class 'msir'")
-#   object$dir[,1:numdir]  
-# }
 
 predict.msir <- function(object, dim = 1:object$numdir, newdata, ...)
 {  
@@ -443,10 +432,9 @@ msir.recoverdir <- function(object, data, normalized = TRUE, std = FALSE)
 {
 # Recover coefficients of the linear combination defining the MSIR directions.
 # This is useful if the directions are obtained from other directions
-  if(class(object) != "msir")
-    stop("object must be of class msir")
-  if(missing(data)) x <- object$x
-  else              x <- as.matrix(data)
+  stopifnot(inherits(object, "msir"))
+  
+  x <- if(missing(data)) object$x else as.matrix(data)
   numdir <- object$numdir
   dir <- object$dir[,1:numdir,drop=FALSE]
   # dir <- scale(x, scale = FALSE) %*% object$raw.basis
@@ -574,8 +562,7 @@ msir.slices <- function(y, nslices)
 
 msir.components <- function(object)
 {
-  if(class(object) != "msir")
-    stop("object is not of class 'msir'")
+  stopifnot(inherits(object, "msir"))
   nslices <- length(object$mixmod)
   ysl <- object$slice.info$slice.indicator
   ycomp <- rep(NA, length(ysl))
@@ -591,8 +578,7 @@ msir.components <- function(object)
 
 msir.componentsSlice <- function(object)
 {
-  if(class(object) != "msir")
-    stop("object is not of class 'msir'")
+  stopifnot(inherits(object, "msir"))
   nslices <- length(object$mixmod)
   ycomp <- rep(NA, length(object$y))
   ysl <- object$slice.info$slice.indicator
