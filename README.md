@@ -14,13 +14,13 @@ The basis of the MSIR subspace is estimated by modeling the inverse distribution
 
 You can install the released version of **msir** from CRAN using:
 
-```{r}
+```
 install.packages("msir")
 ```
 
 or the development version from GitHub:
 
-``` r
+```
 # install.packages("devtools")
 devtools::install_github("luca-scr/msir", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
@@ -29,7 +29,7 @@ devtools::install_github("luca-scr/msir", build = TRUE, build_opts = c("--no-res
 
 Usage of the main function and some examples are included in vignette **A quick tour of msir**, which is available as
 
-```{r}
+```
 vignette("msir")
 ```
 
